@@ -9,6 +9,9 @@ import {
   Outlet,
 } from 'react-router-dom';
 import { fakeAuthProvider } from './auth';
+import Dashboard from './views/dashboard/Dashboard';
+import SignInSide from './views/sign-in-side/SignInSide';
+import SignIn from './views/sign-in/SignIn';
 
 export default function App() {
   return (
@@ -19,18 +22,12 @@ export default function App() {
             path="/"
             element={
               <RequireAuth>
-                <ProtectedPage />
+                <Dashboard />
               </RequireAuth>
             }
           />
-          <Route path="/login" element={<LoginPage />} />
-          <Route
-            path="/protected"
-            element={
-              <RequireAuth>
-                <ProtectedPage />
-              </RequireAuth>
-            }
+          <Route path="/login" element={<SignIn />} />
+          <Route path="/dashboard" element={<Dashboard />}
           />
         </Route>
       </Routes>
@@ -41,7 +38,7 @@ export default function App() {
 function Layout() {
   return (
     <div>
-      <AuthStatus />
+      {/* <AuthStatus /> */}
 
       {/* <ul>
         <li>
@@ -134,14 +131,14 @@ function LoginPage() {
   let location = useLocation();
   let auth = useAuth();
 
-  let from = location.state?.from?.pathname || '/';
+  let from = location.pathname || '/';
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     let formData = new FormData(event.currentTarget);
     let username = formData.get('username') as string;
-
+    let password = formData.get('password') as string;
     auth.signin(username, () => {
       // Send them back to the page they tried to visit when they were
       // redirected to the login page. Use { replace: true } so we don't create
@@ -160,6 +157,9 @@ function LoginPage() {
       <form onSubmit={handleSubmit}>
         <label>
           Username: <input name="username" type="text" />
+        </label>{' '}
+        <label>
+          Password: <input name="password" type="text" />
         </label>{' '}
         <button type="submit">Login</button>
       </form>
