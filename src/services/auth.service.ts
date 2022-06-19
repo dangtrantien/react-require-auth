@@ -1,3 +1,6 @@
+import React from "react";
+import AuthContext from "src/views/auth/AuthenContext";
+
 /**
  * This represents some generic auth provider API, like Firebase.
  */
@@ -9,8 +12,14 @@ const fakeAuthProvider = {
   },
   signout(callback: VoidFunction) {
     fakeAuthProvider.isAuthenticated = false;
+    sessionStorage.removeItem('user')
     setTimeout(callback, 100);
   },
 };
 
-export { fakeAuthProvider };
+function useAuth() {
+  return { user: sessionStorage.getItem('user') }
+  // return React.useContext(AuthContext);
+}
+
+export { fakeAuthProvider, useAuth };

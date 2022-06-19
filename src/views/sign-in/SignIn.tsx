@@ -39,6 +39,10 @@ export default function SignIn() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    sessionStorage.setItem('user',JSON.stringify({
+      email: data.get('email'),
+      password: data.get('password'),
+    }))
     navigate('/dashboard', { replace: true });
   };
 
