@@ -18,7 +18,7 @@ const fakeAuthProvider = {
 };
 
 function useAuth() {
-  return { user: sessionStorage.getItem('user') }
+  return { user: sessionStorage.getItem('user'), token:  sessionStorage.getItem('token')}
   // return React.useContext(AuthContext);
 }
 

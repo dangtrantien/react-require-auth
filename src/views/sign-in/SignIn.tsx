@@ -39,10 +39,12 @@ export default function SignIn() {
       email: data.get('email'),
       password: data.get('password'),
     });
-    sessionStorage.setItem('user',JSON.stringify({
+    sessionStorage.setItem('user', JSON.stringify({
       email: data.get('email'),
       password: data.get('password'),
     }))
+    //Gọi tới api authentication để lấy token
+    sessionStorage.setItem('token', '');
     navigate('/dashboard', { replace: true });
   };
 
