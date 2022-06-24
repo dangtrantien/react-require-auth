@@ -6,8 +6,8 @@ export function RequireAuth({ children }: { children: JSX.Element }) {
     let auth = useAuth();
     let location = useLocation();
   
-    if (!auth.user) {
-      // Nếu chưa có thông tin user thì chuyển về màn hình login
+    if (!auth.token) {
+      // Nếu chưa có thông tin token thì chuyển về màn hình login
       return <Navigate to="/login" state={{ from: location }} replace />;
     }
   

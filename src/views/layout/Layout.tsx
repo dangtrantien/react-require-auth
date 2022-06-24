@@ -17,9 +17,8 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { Icon } from '@mui/material';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import { fakeAuthProvider } from 'src/services/auth.service';
+import { authentication } from 'src/services/auth.service';
 
 function Copyright(props: any) {
     return (
@@ -93,10 +92,8 @@ function LayoutContent() {
         setOpen(!open);
     };
     const logout = () => {
-        fakeAuthProvider.signout(() => {
-            navigate('/login', { replace: true });
-        })
-
+        authentication.sigout();
+        navigate('/login', { replace: true });
     }
     return (
         <ThemeProvider theme={mdTheme}>

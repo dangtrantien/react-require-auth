@@ -12,7 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { authentication } from 'src/services/auth.service';
 
 function Copyright(props: any) {
   return (
@@ -30,22 +31,22 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function SignIn() {
-  let location = useLocation();
   let navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    sessionStorage.setItem('user', JSON.stringify({
-      email: data.get('email'),
-      password: data.get('password'),
-    }))
     //Gọi tới api authentication để lấy token
-    sessionStorage.setItem('token', '');
-    navigate('/dashboard', { replace: true });
+    authentication.signin(`${data.get('email')}`, `${data.get('password')}`)
+      .then(res => {
+        if (res.data.existed === true) {
+          sessionStorage.setItem('token', res.data.token);
+          navigate('/dashboard', { replace: true });
+        }
+        else {
+          sessionStorage.removeItem('token');
+          alert('Wrong inform');
+        }
+      })
   };
 
   return (

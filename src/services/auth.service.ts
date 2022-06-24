@@ -1,5 +1,7 @@
 import React from "react";
 import AuthContext from "src/views/auth/AuthenContext";
+import axios from 'axios'
+import { SignpostOutlined } from "@mui/icons-material";
 
 /**
  * This represents some generic auth provider API, like Firebase.
@@ -17,9 +19,25 @@ const fakeAuthProvider = {
   },
 };
 
+const authentication = {
+  async signin(u: String, p: String) {
+    const res = await axios({
+      method: 'POST',
+      url: 'http://localhost:3001/api/users/signIn',
+      data: { username: u, password: p }
+    });
+
+    return res;
+  },
+
+  sigout() {
+    sessionStorage.removeItem('token');
+  },
+}
+
 function useAuth() {
-  return { user: sessionStorage.getItem('user'), token:  sessionStorage.getItem('token')}
+  return { user: sessionStorage.getItem('user'), token: sessionStorage.getItem('token') }
   // return React.useContext(AuthContext);
 }
 
-export { fakeAuthProvider, useAuth };
+export { fakeAuthProvider, authentication, useAuth };
