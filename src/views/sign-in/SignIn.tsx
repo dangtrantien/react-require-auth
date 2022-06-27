@@ -14,6 +14,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { authentication } from 'src/services/auth.service';
+import axios from 'axios';
 
 function Copyright(props: any) {
   return (
@@ -39,7 +40,21 @@ export default function SignIn() {
     authentication.signin(`${data.get('email')}`, `${data.get('password')}`)
       .then(res => {
         if (res.data.existed === true) {
-          sessionStorage.setItem('token', res.data.token);
+          const token = res.data.token;
+
+          sessionStorage.setItem('token', token);
+
+          //Tạo token cho mọi địa chỉ API
+          axios.interceptors.request.use((config: any) => {
+            config.headers.Authorization = `Bearer ${token}`;
+
+            return config;
+          },
+            err => {
+              return Promise.reject(err);
+            }
+          );
+
           navigate('/dashboard', { replace: true });
         }
         else {

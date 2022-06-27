@@ -23,7 +23,7 @@ const authentication = {
   async signin(u: String, p: String) {
     const res = await axios({
       method: 'POST',
-      url: 'http://localhost:3001/api/users/signIn',
+      url: 'http://localhost:5000/api/users/signIn',
       data: { username: u, password: p }
     });
 
@@ -31,6 +31,7 @@ const authentication = {
   },
 
   sigout() {
+    delete axios.defaults.headers.common['Authorization'];
     sessionStorage.removeItem('token');
   },
 }

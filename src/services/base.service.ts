@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_URL = 'http://localhost:3001/api';
+const API_URL = 'http://localhost:5000/api';
 
 export default class BaseService {
     api: string;
@@ -11,11 +11,11 @@ export default class BaseService {
     }
 
     GetAll = async (param: { skip: any; take: any; orderBy: any; }) => {
-        const token = sessionStorage.getItem('token');
+        // const token = sessionStorage.getItem('token');
         const res = await axios({
-            headers: {
-                "Authorization": `Bearer ${token}`
-            },
+            // headers: {
+            //     "Authorization": `Bearer ${token}`
+            // },
             method: 'GET',
             url: `${this.api}/${this.endpoint}?skip=${param.skip}&limit=${param.take}&orderBy=${param.orderBy}`,
             data: null,
@@ -24,10 +24,10 @@ export default class BaseService {
         return res;
     }
 
-    Count = async () => {
+    FindById = async (id: string | undefined) => {
         const res = await axios({
             method: 'GET',
-            url: `${this.api}/${this.endpoint}/count`,
+            url: `${this.api}/${this.endpoint}/detail?id=${id}`,
             data: null,
         })
 
