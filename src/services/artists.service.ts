@@ -25,4 +25,38 @@ export default class ArtistService extends BaseService {
 
         return res;
     }
+
+    AddNewArtist = async (artist: any) => {
+        const res = await axios({
+            method: 'PUT',
+            url: `${this.api}/${this.endpoint}/insertArtist`,
+            data: {
+                artist: artist,
+            },
+        })
+
+        return res;
+    }
+
+    EditArtist = async (artist: any) => {
+        const res = await axios({
+            method: 'POST',
+            url: `${this.api}/${this.endpoint}/update`,
+            data: {
+                artist: artist,
+            },
+        })
+
+        return res;
+    }
+
+    DeleteArtist = async (id: any) => {
+        const res = await axios({
+            method: 'DELETE',
+            url: `${this.api}/${this.endpoint}/deleteById?id=${id}`,
+            data: null,
+        })
+
+        return res;
+    }
 }
