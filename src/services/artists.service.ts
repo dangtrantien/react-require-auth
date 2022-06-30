@@ -4,7 +4,7 @@ import axios from "axios";
 export default class ArtistService extends BaseService {
     constructor() {
         super({ endpoint: 'artists' });
-    }
+    };
 
     async FindByName(filter: String) {
         const res = await axios({
@@ -14,17 +14,7 @@ export default class ArtistService extends BaseService {
         })
 
         return res;
-    }
-
-    Count = async () => {
-        const res = await axios({
-            method: 'GET',
-            url: `${this.api}/${this.endpoint}/count`,
-            data: null,
-        })
-
-        return res;
-    }
+    };
 
     AddNewArtist = async (artist: any) => {
         const res = await axios({
@@ -36,7 +26,7 @@ export default class ArtistService extends BaseService {
         })
 
         return res;
-    }
+    };
 
     EditArtist = async (artist: any) => {
         const res = await axios({
@@ -48,15 +38,5 @@ export default class ArtistService extends BaseService {
         })
 
         return res;
-    }
-
-    DeleteArtist = async (id: any) => {
-        const res = await axios({
-            method: 'DELETE',
-            url: `${this.api}/${this.endpoint}/deleteById?id=${id}`,
-            data: null,
-        })
-
-        return res;
-    }
+    };
 }

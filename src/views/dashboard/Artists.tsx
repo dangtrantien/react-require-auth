@@ -117,7 +117,7 @@ export default function Artists() {
     }
 
     const deleteArtist = function (id: any) {
-        service.DeleteArtist(id).then(res => {
+        service.DeleteById(id).then(res => {
             // const result = res.data.success;
             if (res.status === 200) {
                 //Thông báo thành công
@@ -251,7 +251,6 @@ export default function Artists() {
                                         id="year_born"
                                         name="year_born"
                                         type='number'
-                                        label="Year born"
                                         value={formData.year_born}
                                         onChange={handleTextFieldChange}
                                         variant="standard"
@@ -266,7 +265,6 @@ export default function Artists() {
                                         id="year_died"
                                         name="year_died"
                                         type='number'
-                                        label="Year died"
                                         value={formData.year_died}
                                         onChange={handleTextFieldChange}
                                         variant="standard"
@@ -322,7 +320,7 @@ export default function Artists() {
                         </TableRow>
                     ))}
                     <TableRow>
-                        <TableCell><b>Total artists: {count} artists</b></TableCell>
+                        <TableCell colSpan={2}><b>Total artists: {count} artists</b></TableCell>
                     </TableRow>
                 </TableBody>
             </Table>

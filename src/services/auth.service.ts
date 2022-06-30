@@ -1,7 +1,4 @@
-import React from "react";
-import AuthContext from "src/views/auth/AuthenContext";
 import axios from 'axios'
-import { SignpostOutlined } from "@mui/icons-material";
 
 /**
  * This represents some generic auth provider API, like Firebase.

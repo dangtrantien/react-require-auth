@@ -9,6 +9,7 @@ import Checkout from './views/checkout/Checkout';
 import Review from './views/checkout/Review';
 import ArtistDetail from './views/dashboard/ArtistDetail';
 import Artists from './views/dashboard/Artists';
+import Blogs from './views/dashboard/Blogs';
 import Dashboard from './views/dashboard/Dashboard';
 import Orders from './views/dashboard/Orders';
 import Layout from './views/layout/Layout';
@@ -26,25 +27,28 @@ export default function App() {
               <RequireAuth>
                 <Dashboard />
               </RequireAuth>
-            }
-          />
+            } />
           <Route path="/login" element={<SignIn />} />
           <Route path="/dashboard" element={
             <RequireAuth>
               <Dashboard />
-            </RequireAuth>}
-          />
+            </RequireAuth>
+          } />
           {/* <Route path="/orders" element={
             <RequireAuth>
               <Orders />
-            </RequireAuth>}
-          /> */}
+            </RequireAuth>
+          } /> */}
           <Route path='/artists' element={
             <RequireAuth>
               <Artists />
             </RequireAuth>
-          }
-          />
+          } />
+          <Route path='/blogs' element={
+            <RequireAuth>
+              <Blogs />
+            </RequireAuth>
+          } />
           <Route path='/artists/:artistId' element={
             <RequireAuth>
               <ArtistDetail />
@@ -53,9 +57,8 @@ export default function App() {
           <Route path="/checkout" element={
             <RequireAuth>
               <Checkout />
-            </RequireAuth>}
-          />
-
+            </RequireAuth>
+          } />
         </Route>
       </Routes>
     </AuthProvider>
