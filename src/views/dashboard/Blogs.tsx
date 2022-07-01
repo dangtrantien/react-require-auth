@@ -10,6 +10,7 @@ import { Alert, AlertTitle, Button, Checkbox, Collapse, Dialog, DialogActions, D
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Box } from '@mui/system';
+import { useNavigate } from 'react-router-dom';
 
 const service = new BlogsService();
 
@@ -38,6 +39,8 @@ export default function Blogs() {
 
         service.Count().then(res => setCount(() => res.data.count))
     };
+
+    const navigate = useNavigate();
 
     const handleClickOpen = () => {
         setFormData({
@@ -303,7 +306,6 @@ export default function Blogs() {
                         <TableCell>Id</TableCell>
                         <TableCell>Title</TableCell>
                         <TableCell>Description</TableCell>
-                        <TableCell>Published</TableCell>
                         <TableCell>PublishedDate</TableCell>
                         <TableCell></TableCell>
                         <TableCell></TableCell>
@@ -315,12 +317,9 @@ export default function Blogs() {
                         <TableRow key={row._id}>
                             <TableCell>{index + 1}</TableCell>
                             <TableCell><Checkbox /></TableCell>
-                            <TableCell><Button>{row._id}</Button></TableCell>
+                            <TableCell><Button onClick={() => { navigate(`${row._id}`, { replace: true }) }}>{row._id}</Button></TableCell>
                             <TableCell>{row.title}</TableCell>
                             <TableCell>{row.description}</TableCell>
-                            <TableCell >
-                                {row.published === false ? 'False' : row.published === true ? 'True' : row.published}
-                            </TableCell>
                             <TableCell>
                                 {row.publishedDate === '' ? 'Not publish' : row.publishedDate}
                             </TableCell>

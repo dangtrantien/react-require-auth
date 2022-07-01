@@ -9,6 +9,7 @@ import Checkout from './views/checkout/Checkout';
 import Review from './views/checkout/Review';
 import ArtistDetail from './views/dashboard/ArtistDetail';
 import Artists from './views/dashboard/Artists';
+import BlogDetail from './views/dashboard/BlogDetail';
 import Blogs from './views/dashboard/Blogs';
 import Dashboard from './views/dashboard/Dashboard';
 import Orders from './views/dashboard/Orders';
@@ -47,6 +48,11 @@ export default function App() {
           <Route path='/blogs' element={
             <RequireAuth>
               <Blogs />
+            </RequireAuth>
+          } />
+          <Route path='/blogs/:blogId' element={
+            <RequireAuth>
+              <BlogDetail />
             </RequireAuth>
           } />
           <Route path='/artists/:artistId' element={
