@@ -20,11 +20,21 @@ export default class BlogsService extends BaseService {
 
     async EditBlog(blog: any) {
         const res = await axios({
-            method: 'PUT',
+            method: 'POST',
             url: `${this.api}/${this.endpoint}/editBlog`,
             data: {
                 blog: blog
             }
+        });
+
+        return res;
+    }
+
+    async DeleteBlog(id: any) {
+        const res = await axios({
+            method: 'DELETE',
+            url: `${this.api}/${this.endpoint}/deleteBlog?id=${id}`,
+            data: null,
         });
 
         return res;
